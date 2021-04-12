@@ -99,7 +99,7 @@ contract Project69 is BEP20 {
     uint256 public totalSupply = 69000000e18;
     uint256 public totalDistributed;
     uint256 public constant requestMinimum = 1 ether / 25; // 0.04 BSC
-    uint256 public tokensPerBsc = 2969e18;
+    uint256 public tokensPerBsc = 2800e18;
     
     uint public target0drop = 0;
     uint public progress0drop = 0;
