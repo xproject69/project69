@@ -98,8 +98,8 @@ contract Project69 is BEP20 {
     
     uint256 public totalSupply = 69000000e18;
     uint256 public totalDistributed;
-    uint256 public constant requestMinimum = 1 ether / 25; // 0.04 BSC
-    uint256 public tokensPerBsc = 2800e18;
+    uint256 public constant requestMinimum = 1 ether / 50; // 0.02 BSC
+    uint256 public tokensPerBsc = 1400e18;
     
     uint public target0drop = 0;
     uint public progress0drop = 0;
@@ -198,27 +198,25 @@ contract Project69 is BEP20 {
         uint256 tokens = 0;
         uint256 bonus = 0;
         uint256 countbonus = 0;
-        uint256 bonusCond1 = 1 ether / 1;
-        uint256 bonusCond2 = 5 ether / 1;
-        uint256 bonusCond3 = 1 ether;
+        uint256 bonusCond1 = 1 ether / 2;
 
-        tokens = tokensPerBsc.mul(msg.value) / 1 ether;        
+
+        tokens = tokensPerBsc.mul(msg.value) / bonusCond1; // 0.5 bsc minimum to get multiplier
         address investor = msg.sender;
 
-        if (msg.value >= requestMinimum && now < deadline && now < round1 && now < round2) {
-            if(msg.value >= bonusCond1 && msg.value < bonusCond2){
-                countbonus = tokens * 10 / 10;
-            }else if(msg.value >= bonusCond2 && msg.value < bonusCond3){
-                countbonus = tokens * 20 / 10;
-            }else if(msg.value >= bonusCond3){
-                countbonus = tokens * 100 / 100;
-            }
-        }else if(msg.value >= requestMinimum && now < deadline && now > round1 && now < round2){
-            if(msg.value >= bonusCond2 && msg.value < bonusCond3){
-                countbonus = tokens * 2 / 10;
-            }else if(msg.value >= bonusCond3){
-                countbonus = tokens * 10 / 10;
-            }
+        if (msg.value >= requestMinimum && now < deadline && now < round1 && now < round2) { // phase 1
+
+            if (msg.value >= bonusCond1){
+                countbonus = tokens * 1 / 4;
+            } else if(msg.value <= bonusCond1) {
+                countbonus = 0;
+            } 
+        }else if(msg.value >= requestMinimum && now < deadline && now > round1 && now < round2){ // phase 2
+            if (msg.value >= bonusCond1){
+                countbonus = tokens * 1 / 5;
+            } else if(msg.value <= bonusCond1) {
+                countbonus = 0;
+            } 
         }else{
             countbonus = 0;
         }
