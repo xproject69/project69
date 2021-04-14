@@ -1,22 +1,3 @@
-/**
- *Submitted for verification at BscScan.com on 2021-04-05
-*/
-
-/*
---------------------------------------------------------------------------------
-The BSC Contract
-
-Project69 Finance
-
-Website: https://project69.network
-
-ERC20: https://github.com/ethereum/EIPs/issues/20
-ERC223: https://github.com/ethereum/EIPs/issues/223
-
-MIT Licence
---------------------------------------------------------------------------------
-*/
-
 pragma solidity ^0.4.25;
 
 library SafeMath {
